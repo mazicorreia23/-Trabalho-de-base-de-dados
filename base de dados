@@ -1,0 +1,57 @@
+CREATE TABLE equipa (
+    id_equipa INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    cidade TEXT,
+    treinador TEXT
+);
+
+CREATE TABLE jogador (
+    id_jogador INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    posicao TEXT,
+    idade INTEGER,
+    id_equipa INTEGER,
+    FOREIGN KEY (id_equipa) REFERENCES equipa(id_equipa)
+);
+
+CREATE TABLE jogo (
+    id_jogo INTEGER PRIMARY KEY AUTOINCREMENT,
+    data DATE NOT NULL,
+    local TEXT,
+    id_equipa_casa INTEGER,
+    id_equipa_fora INTEGER,
+    golos_casa INTEGER DEFAULT 0,
+    golos_fora INTEGER DEFAULT 0,
+    FOREIGN KEY (id_equipa_casa) REFERENCES equipa(id_equipa),
+    FOREIGN KEY (id_equipa_fora) REFERENCES equipa(id_equipa)
+);
+
+CREATE TABLE golo (
+    id_golo INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_jogador INTEGER,
+    id_jogo INTEGER,
+    minuto INTEGER,
+    FOREIGN KEY (id_jogador) REFERENCES jogador(id_jogador),
+    FOREIGN KEY (id_jogo) REFERENCES jogo(id_jogo)
+);
+
+CREATE TABLE utilizador (
+    id_utilizador INTEGER PRIMARY KEY AUTOINCREMENT,
+    conta TEXT UNIQUE NOT NULL,
+    palavra_passe TEXT NOT NULL
+);
+
+CREATE TABLE tipo_consulta (
+    id_tipo INTEGER PRIMARY KEY AUTOINCREMENT,
+    descricao TEXT NOT NULL,
+    custo REAL NOT NULL
+);
+
+CREATE TABLE consulta (
+    id_consulta INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_utilizador INTEGER,
+    id_tipo INTEGER,
+    data_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_utilizador) REFERENCES utilizador(id_utilizador),
+    FOREIGN KEY (id_tipo) REFERENCES tipo_consulta(id_tipo)
+);
