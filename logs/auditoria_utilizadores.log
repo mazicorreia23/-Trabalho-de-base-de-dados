@@ -1,0 +1,7 @@
+[2026-06-06 14:01:21] AÇÃO: INSERÇÃO | DETALHES: Conta 'teste3' criada pelo Administrador.
+[2026-06-06 14:01:26] AÇÃO: REMOÇÃO | DETALHES: Conta 'teste2' (ID: 3) apagada pelo Administrador.
+[2026-06-06 15:39:10] AÇÃO: INSERÇÃO | DETALHES: Conta 'teste4' criada.
+[2026-06-06 15:39:32] AÇÃO: ALTERAÇÃO | DETALHES: Palavra-passe da conta 'teste3' (ID: 4) alterada.
+[2026-06-06 15:40:10] AÇÃO: REMOÇÃO | DETALHES: Conta 'teste3' (ID: 4) apagada.
+[2026-06-06 15:53:00] AÇÃO: PAGAMENTO | DETALHES: Dívida da conta 'teste4' (ID: 5) liquidada.
+[2026-06-07 14:40:56] AÇÃO: PAGAMENTO | DETALHES: Dívida da conta 'teste4' (ID: 5) liquidada.

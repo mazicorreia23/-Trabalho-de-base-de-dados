@@ -1,0 +1,64 @@
+-- 1. Criação da tabela equipa (Não depende de nenhuma outra)
+CREATE TABLE equipa (
+    id_equipa INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    cidade VARCHAR(80),
+    treinador VARCHAR(100)
+);
+
+-- 2. Criação da tabela jogador (Depende da equipa)
+CREATE TABLE jogador (
+    id_jogador INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    posicao VARCHAR(50),
+    idade INTEGER,
+    id_equipa INTEGER,
+    FOREIGN KEY (id_equipa) REFERENCES equipa(id_equipa)
+);
+
+-- 3. Criação da tabela jogo (Depende da equipa duas vezes)
+CREATE TABLE jogo (
+    id_jogo INTEGER PRIMARY KEY AUTOINCREMENT,
+    data DATE NOT NULL,
+    local VARCHAR(100),
+    id_equipa_casa INTEGER,
+    id_equipa_fora INTEGER,
+    golos_casa INTEGER,
+    golos_fora INTEGER,
+    FOREIGN KEY (id_equipa_casa) REFERENCES equipa(id_equipa),
+    FOREIGN KEY (id_equipa_fora) REFERENCES equipa(id_equipa)
+);
+
+-- 4. Criação da tabela golo (Depende do jogador e do jogo)
+CREATE TABLE golo (
+    id_golo INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_jogador INTEGER,
+    id_jogo INTEGER,
+    minuto INTEGER,
+    FOREIGN KEY (id_jogador) REFERENCES jogador(id_jogador),
+    FOREIGN KEY (id_jogo) REFERENCES jogo(id_jogo)
+);
+
+-- 5. Criação da tabela utilizador (Não depende de nenhuma outra)
+CREATE TABLE utilizador (
+    id_utilizador INTEGER PRIMARY KEY AUTOINCREMENT,
+    conta VARCHAR(50) NOT NULL,
+    palavra_passe VARCHAR(100) NOT NULL
+);
+
+-- 6. Criação da tabela tipo_consulta (Não depende de nenhuma outra)
+CREATE TABLE tipo_consulta (
+    id_tipo INTEGER PRIMARY KEY AUTOINCREMENT,
+    descricao VARCHAR(100) NOT NULL,
+    custo DECIMAL(5,2) NOT NULL
+);
+
+-- 7. Criação da tabela consulta (Depende do utilizador e do tipo_consulta)
+CREATE TABLE consulta (
+    id_consulta INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_utilizador INTEGER,
+    id_tipo INTEGER,
+    data_hora DATETIME,
+    FOREIGN KEY (id_utilizador) REFERENCES utilizador(id_utilizador),
+    FOREIGN KEY (id_tipo) REFERENCES tipo_consulta(id_tipo)
+);
